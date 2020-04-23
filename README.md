@@ -6,7 +6,6 @@ Sitio WEB:
   http://leer-comics.blogspot.com/2019/02/coleccion-ole.html
 
 ## GNU/Linux
-  * Descarge el archvo <b>ole.pl</b>.
   * Cree el directorio /home/<i>su_usuario</i>/bin:
     > mkdir /home/su_usuario/bin
   * Descargue el archivo <b>ole.pl</b> y guárdelo en /home/<i>su_usuario</i>/bin"
