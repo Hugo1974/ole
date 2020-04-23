@@ -15,6 +15,7 @@ my $url   = 'http://leer-comics.blogspot.com/2019/02/coleccion-ole.html?m=1';
 
 my $mech = WWW::Mechanize->new();
 $mech->get("$url");
+
 foreach my $link ( $mech->links ) {
     my $url  = $link->url;
     my $text = $link->text;
@@ -34,19 +35,15 @@ for my $link (@links) {
     $nombre =~ s/.*OLE /$`/o;
     $nombre =~ s/^\d+/$& -/o;
 
-    say ">> $nombre";
     $mech->get($link);
+    
     my @links = $mech->find_all_links(
         tag       => "a",
         url_regex => qr/\d+\.jpg$/i
     );
 
-    for my $image (@links) {
-        say $image->url;
-    }
-
-    # print "Se han encontrado " . $#links - 1 . "páginas";
     say "¿Quiere descargar el tebeo \"$nombre\"? [s/n/x]";
+    
     while ( my $sn = <> ) {
         chomp $sn;
         exit if $sn eq 'x';
@@ -63,7 +60,6 @@ sub descargar {
     for my $l (@$links) {
         my @archivo = split( /\//, $l->url );
         say "Descargando " . $l->url . " en\n\t" . "/tmp/$nombre/$archivo[-1]";
-
         getstore( $l->url, "/tmp/$nombre/$archivo[-1]" );
     }
     return;
